@@ -18,6 +18,7 @@ import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
 import Link from 'next/link'
+import { sunoMockData } from './suno-mock-data'
 
 async function submitUserMessage(content: string) {
   'use server'
@@ -89,9 +90,7 @@ async function submitUserMessage(content: string) {
 
           await sleep(1000)
 
-          
-
-          const clipId = nanoid()
+          const clipId = sunoMockData[0].id
 
           const toolCallId = nanoid()
 
@@ -130,7 +129,9 @@ async function submitUserMessage(content: string) {
             <BotCard>
               <span>Generated music.</span>
 
-              <Link href={`https://suno.ai/${clipId}`}>Listen ${clipId}</Link>
+              <Link href={`https://suno.com/song/${clipId}`}>
+                Listen ${clipId}
+              </Link>
             </BotCard>
           )
         }
