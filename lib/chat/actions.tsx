@@ -89,6 +89,8 @@ async function submitUserMessage(content: string) {
 
           await sleep(1000)
 
+          
+
           const clipId = nanoid()
 
           const toolCallId = nanoid()
