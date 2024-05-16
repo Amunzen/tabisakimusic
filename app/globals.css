@@ -44,5 +44,7 @@
     @apply bg-background text-foreground;
     background-image: url('/bg.png');
     background-size: cover;
+    background-color: rgba(255, 255, 255, 0.7); /* 背景色を白の半透明に設定 */
+    background-blend-mode: lighten; /* 画像と背景色を合成するモードを設定 */
   }
 }
