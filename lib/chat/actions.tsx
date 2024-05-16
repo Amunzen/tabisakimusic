@@ -9,17 +9,15 @@ import {
 } from 'ai/rsc'
 import { openai } from '@ai-sdk/openai'
 
-import { BotCard, BotMessage, Stock, Purchase } from '@/components/music'
+import { BotCard, BotMessage } from '@/components/music'
 
 import { z } from 'zod'
-import { Events } from '@/components/music/events'
-import { MusicSkeleton } from '@/components/music/music-skeleton'
-import { Stocks } from '@/components/music/stocks'
 import { sleep, nanoid } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
+import Link from 'next/link'
 
 async function submitUserMessage(content: string) {
   'use server'
@@ -44,21 +42,7 @@ async function submitUserMessage(content: string) {
   const result = await streamUI({
     model: openai('gpt-4o'),
     initial: <SpinnerMessage />,
-    system: `\
-    You are a stock trading conversation bot and you can help users buy stocks, step by step.
-    You and the user can discuss stock prices and the user can adjust the amount of stocks they want to buy, or place an order, in the UI.
-    
-    Messages inside [] means that it's a UI element or a user event. For example:
-    - "[Price of AAPL = 100]" means that an interface of the stock price of AAPL is shown to the user.
-    - "[User has changed the amount of AAPL to 10]" means that the user has changed the amount of AAPL to 10 in the UI.
-    
-    If the user requests purchasing a stock, call \`show_stock_purchase_ui\` to show the purchase UI.
-    If the user just wants the price, call \`show_stock_price\` to show the price.
-    If you want to show trending stocks, call \`list_stocks\`.
-    If you want to show events, call \`get_events\`.
-    If the user wants to sell stock, or complete another impossible task, respond that you are a demo and cannot do that.
-    
-    Besides that, you can also chat with users and do some calculations if needed.`,
+    system: `You are music generator`,
     messages: [
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
@@ -92,25 +76,20 @@ async function submitUserMessage(content: string) {
       return textNode
     },
     tools: {
-      listStocks: {
-        description: 'List three imaginary stocks that are trending.',
-        parameters: z.object({
-          stocks: z.array(
-            z.object({
-              symbol: z.string().describe('The symbol of the stock'),
-              price: z.number().describe('The price of the stock'),
-              delta: z.number().describe('The change in price of the stock')
-            })
-          )
-        }),
-        generate: async function* ({ stocks }) {
+      generateMusic: {
+        description: 'Generate music',
+        parameters: z.object({ prompt: z.string() }),
+        generate: async function* ({ prompt }) {
           yield (
             <BotCard>
-              <MusicSkeleton />
+              {/* <MusicSkeleton /> */}
+              <span>Generating music...</span>
             </BotCard>
           )
 
           await sleep(1000)
+
+          const clipId = nanoid()
 
           const toolCallId = nanoid()
 
@@ -124,9 +103,9 @@ async function submitUserMessage(content: string) {
                 content: [
                   {
                     type: 'tool-call',
-                    toolName: 'listStocks',
+                    toolName: 'generateMusic',
                     toolCallId,
-                    args: { stocks }
+                    args: { prompt, clipId }
                   }
                 ]
               },
@@ -136,9 +115,9 @@ async function submitUserMessage(content: string) {
                 content: [
                   {
                     type: 'tool-result',
-                    toolName: 'listStocks',
+                    toolName: 'generateMusic',
                     toolCallId,
-                    result: stocks
+                    result: { prompt, clipId }
                   }
                 ]
               }
@@ -147,7 +126,9 @@ async function submitUserMessage(content: string) {
 
           return (
             <BotCard>
-              <Stocks props={stocks} />
+              <span>Generated music.</span>
+
+              <Link href={`https://suno.ai/${clipId}`}>Listen ${clipId}</Link>
             </BotCard>
           )
         }
@@ -232,26 +213,10 @@ export const getUIStateFromAIState = (aiState: Chat) => {
       display:
         message.role === 'tool' ? (
           message.content.map(tool => {
-            return tool.toolName === 'listStocks' ? (
-              <BotCard>
-                {/* TODO: Infer types based on the tool result*/}
-                {/* @ts-expect-error */}
-                <Stocks props={tool.result} />
-              </BotCard>
-            ) : tool.toolName === 'showStockPrice' ? (
+            return tool.toolName === 'generateMusic' ? (
               <BotCard>
                 {/* @ts-expect-error */}
-                <Stock props={tool.result} />
-              </BotCard>
-            ) : tool.toolName === 'showStockPurchase' ? (
-              <BotCard>
-                {/* @ts-expect-error */}
-                <Purchase props={tool.result} />
-              </BotCard>
-            ) : tool.toolName === 'getEvents' ? (
-              <BotCard>
-                {/* @ts-expect-error */}
-                <Events props={tool.result} />
+                <span>prompt:{tool.result.prompt}</span>
               </BotCard>
             ) : null
           })
