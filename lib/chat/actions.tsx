@@ -17,14 +17,14 @@ import {
   SystemMessage,
   Stock,
   Purchase
-} from '@/components/stocks'
+} from '@/components/music'
 
 import { z } from 'zod'
-import { EventsSkeleton } from '@/components/stocks/events-skeleton'
-import { Events } from '@/components/stocks/events'
-import { StocksSkeleton } from '@/components/stocks/stocks-skeleton'
-import { Stocks } from '@/components/stocks/stocks'
-import { StockSkeleton } from '@/components/stocks/stock-skeleton'
+import { EventsSkeleton } from '@/components/music/events-skeleton'
+import { Events } from '@/components/music/events'
+import { StocksSkeleton } from '@/components/music/stocks-skeleton'
+import { Stocks } from '@/components/music/stocks'
+import { StockSkeleton } from '@/components/music/stock-skeleton'
 import {
   formatNumber,
   runAsyncFnWithoutBlocking,
@@ -32,7 +32,7 @@ import {
   nanoid
 } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
-import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
+import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
 
