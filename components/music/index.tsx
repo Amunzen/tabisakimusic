@@ -33,4 +33,11 @@ const Events = dynamic(() => import('./events').then(mod => mod.Events), {
   loading: () => <EventsSkeleton />
 })
 
-export { Stock, Purchase, Stocks, Events }
+const SongIFrame = dynamic(
+  () => import('./song-frame').then(mod => mod.default),
+  {
+    ssr: false,
+    loading: () => <MusicSkeleton />
+  }
+)
+export { Stock, Purchase, Stocks, Events, SongIFrame }

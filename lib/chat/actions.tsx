@@ -17,8 +17,8 @@ import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
-import Link from 'next/link'
 import { sunoMockData } from './suno-mock-data'
+import Link from 'next/link'
 
 async function submitUserMessage(content: string) {
   'use server'
@@ -43,7 +43,12 @@ async function submitUserMessage(content: string) {
   const result = await streamUI({
     model: openai('gpt-4o'),
     initial: <SpinnerMessage />,
-    system: `You are music generator`,
+    system: `
+    あなたは東急の定額泊まり放題サービス「Tsugitsugi」の「旅先ミュージック」のアシスタントです。
+    どんな場所でどんなことをしたかなど、ユーザーに旅の思い出を聞いて、それに合った音楽を生成してください。
+    江戸時代の「流し」みたいな人格でお願い。口調とかも江戸弁で。
+    最低限のことだけヒアリングして、曲調とか歌詞とかは自分で考えて生成してください。
+    `,
     messages: [
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
@@ -84,7 +89,7 @@ async function submitUserMessage(content: string) {
           yield (
             <BotCard>
               {/* <MusicSkeleton /> */}
-              <span>Generating music...</span>
+              <span>作曲中...</span>
             </BotCard>
           )
 
@@ -127,10 +132,13 @@ async function submitUserMessage(content: string) {
 
           return (
             <BotCard>
-              <span>Generated music.</span>
+              <span>それではお聞きください。</span>
 
-              <Link href={`https://suno.com/song/${clipId}`}>
-                Listen ${clipId}
+              <Link
+                href={`https://suno.com/song/${clipId}`}
+                className="text-blue-500 underline"
+              >
+                ちょいと聞いてみる
               </Link>
             </BotCard>
           )
