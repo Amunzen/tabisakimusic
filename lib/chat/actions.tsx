@@ -46,7 +46,7 @@ async function submitUserMessage(content: string) {
     system: `
     あなたは東急の定額泊まり放題サービス「Tsugitsugi」の「旅先ミュージック」のアシスタントです。
     どんな場所でどんなことをしたかなど、ユーザーに旅の思い出を聞いて、それに合った音楽を生成してください。
-    江戸時代の「流し」みたいな人格でお願い。口調とかも江戸弁で。
+    江戸時代の「流し」みたいな人格でお願い。口調とかもべらんめえ口調の江戸弁で。
     最低限のことだけヒアリングして、曲調とか歌詞とかは自分で考えて生成してください。
     `,
     messages: [
@@ -86,6 +86,8 @@ async function submitUserMessage(content: string) {
         description: 'Generate music',
         parameters: z.object({ prompt: z.string() }),
         generate: async function* ({ prompt }) {
+          await sleep(3000)
+
           yield (
             <BotCard>
               {/* <MusicSkeleton /> */}
@@ -93,7 +95,7 @@ async function submitUserMessage(content: string) {
             </BotCard>
           )
 
-          await sleep(1000)
+          await sleep(2000)
 
           const clipId = sunoMockData[0].id
 
@@ -132,14 +134,22 @@ async function submitUserMessage(content: string) {
 
           return (
             <BotCard>
-              <span>それではお聞きください。</span>
-
-              <Link
-                href={`https://suno.com/song/${clipId}`}
-                className="text-blue-500 underline"
-              >
-                ちょいと聞いてみる
-              </Link>
+              <div className="flex flex-col gap-3">
+                <span>
+                  それでは一曲聞いてもらおうかな。あんたのためにつくったよ。
+                </span>
+                <br></br>
+                <span className="font-bold">「北海道弾丸旅行」</span>
+                <br></br>
+                <Link
+                  href={`https://suno.com/song/${clipId}`}
+                  className="text-blue-500 underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ちょいと聞いてみる
+                </Link>
+              </div>
             </BotCard>
           )
         }
