@@ -22,7 +22,7 @@ import {
 import { z } from 'zod'
 import { EventsSkeleton } from '@/components/music/events-skeleton'
 import { Events } from '@/components/music/events'
-import { StocksSkeleton } from '@/components/music/stocks-skeleton'
+import { MusicSkeleton } from '@/components/music/music-skeleton'
 import { Stocks } from '@/components/music/stocks'
 import { StockSkeleton } from '@/components/music/stock-skeleton'
 import {
@@ -191,7 +191,7 @@ async function submitUserMessage(content: string) {
         generate: async function* ({ stocks }) {
           yield (
             <BotCard>
-              <StocksSkeleton />
+              <MusicSkeleton />
             </BotCard>
           )
 
