@@ -92,10 +92,11 @@ async function submitUserMessage(content: string) {
             <BotCard>
               {/* <MusicSkeleton /> */}
               <span>作曲中...</span>
+              <SpinnerMessage />
             </BotCard>
           )
 
-          await sleep(2000)
+          await sleep(3000)
 
           const clipId = sunoMockData[0].id
 
