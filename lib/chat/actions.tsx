@@ -12,7 +12,7 @@ import { openai } from '@ai-sdk/openai'
 import { BotCard, BotMessage } from '@/components/music'
 
 import { z } from 'zod'
-import { sleep, nanoid } from '@/lib/utils'
+import { sleep, nanoid, validateMode } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
@@ -21,11 +21,16 @@ import { sunoMockData } from './suno-mock-data'
 import Link from 'next/link'
 
 function getModeScript(mode: string) {
-  switch (mode) {
+  const validatedMode = validateMode(mode)
+  switch (validatedMode) {
     case 'otsugiyama':
-      return 'あなたは「お次山」という江戸時代の女性の人格として回答してください。'
+      return 'あなたは「お次山」という江戸時代の女性の人格として回答してください。お風呂をこよなく愛している、お相撲さんのような体格の人です。'
     case 'bujigaeru':
-      return 'あなたは「ブシガエル」というカエルの人格として、語尾にケロがつくようにしてください。'
+      return 'あなたは「ブシガエル」というカエルの人格として、語尾にケロがつくようにしてください。ダジャレ好きの明るい蛙です。'
+    case 'tsugihime':
+      return 'あなたは「つぎひめ」という江戸時代の女性の人格として、回答してください。良家の娘で美味しいご飯が大好きです。'
+    case 'kojiro':
+      return 'あなたは「小次郎」という江戸時代の男性の人格として、回答してください。子連れ旅行に強い、子供です。内緒話が大好き。'
   }
 }
 
