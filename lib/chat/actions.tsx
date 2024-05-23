@@ -12,12 +12,11 @@ import { openai } from '@ai-sdk/openai'
 import { BotCard, BotMessage } from '@/components/music'
 
 import { z } from 'zod'
-import { sleep, nanoid, validateMode } from '@/lib/utils'
+import { nanoid, validateMode } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
-import { sunoMockData } from './suno-mock-data'
 import Link from 'next/link'
 
 function getModeScript(mode: string) {
@@ -61,7 +60,8 @@ async function submitUserMessage(content: string) {
     あなたは東急の定額泊まり放題サービス「Tsugitsugi」の「旅先ミュージック」のアシスタントです。
     どんな場所でどんなことをしたかなど、ユーザーに旅の思い出を聞いて、それに合った音楽を生成してください。
     江戸時代の「流し」みたいな人格でお願い。口調とかもべらんめえ口調の江戸弁で。
-    最低限のことだけヒアリングして、曲調とか歌詞とかは自分で考えて生成してください。
+    最低限のことだけヒアリングして、曲調とか歌詞とかは自分でなるべく考えて生成してください。
+    
     ${getModeScript(aiState.get().mode || 'otsugiyama')}
     `,
     messages: [
@@ -103,8 +103,6 @@ async function submitUserMessage(content: string) {
         description: 'Generate music',
         parameters: z.object({ prompt: z.string() }),
         generate: async function* ({ prompt }) {
-          await sleep(3000)
-
           yield (
             <BotCard mode={aiState.get().mode}>
               <span>作曲中...</span>
@@ -112,9 +110,18 @@ async function submitUserMessage(content: string) {
             </BotCard>
           )
 
-          await sleep(3000)
+          const url = 'https://suno-api-opal-alpha.vercel.app/api/generate'
+          const result = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt })
+          }).then(res => res.json())
+          console.log('result', result)
 
-          const clipId = sunoMockData[0].id
+          const clipId = result[0].id
+          console.log('clipId', clipId)
 
           const toolCallId = nanoid()
 
@@ -156,7 +163,7 @@ async function submitUserMessage(content: string) {
                   それでは一曲聞いてもらおうかな。あんたのためにつくったよ。
                 </span>
                 <br></br>
-                <span className="font-bold">「北海道弾丸旅行」</span>
+                {/* <span className="font-bold">「北海道弾丸旅行」</span> */}
                 <br></br>
                 <Link
                   href={`https://suno.com/song/${clipId}`}
