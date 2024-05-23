@@ -90,7 +90,7 @@ export const getMessageFromCode = (resultCode: string) => {
 
 export function validateMode(mode: string) {
   if (!['tsugihime', 'bujigaeru', 'kojiro', 'otsugiyama'].includes(mode)) {
-    return 'tsugihime'
+    throw new Error('Invalid mode: ' + mode)
   }
   return mode
 }

@@ -14,9 +14,9 @@ export function ChatList({ messages, session, isShared }: ChatList) {
   }
 
   return (
-    <div className="relative mx-auto max-w-2xl px-4 ">
+    <div className="relative mx-auto max-w-2xl  bg-white rounded-md p-10 px-20">
       {messages.map((message, index) => (
-        <div key={message.id}>
+        <div key={message.id} className="">
           {message.display}
           {index < messages.length - 1 && <Separator className="my-4" />}
         </div>
