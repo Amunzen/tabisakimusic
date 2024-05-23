@@ -1,7 +1,7 @@
 const imageUrl = `/bg.png`
 
 export function Background() {
-  return <div style={styles.backgroundMain} />
+  return <div className=" backdrop-blur-sm" />
 }
 
 const styles: { [key: string]: React.CSSProperties } = {
