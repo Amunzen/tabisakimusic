@@ -20,6 +20,15 @@ import { auth } from '@/auth'
 import { sunoMockData } from './suno-mock-data'
 import Link from 'next/link'
 
+function getModeScript(mode: string) {
+  switch (mode) {
+    case 'otsugiyama':
+      return 'あなたは「お次山」という江戸時代の女性の人格として回答してください。'
+    case 'bushigaeru':
+      return 'あなたは「武士がえる」というカエルの人格として、語尾にケロがつくようにしてください。'
+  }
+}
+
 async function submitUserMessage(content: string) {
   'use server'
 
@@ -48,6 +57,7 @@ async function submitUserMessage(content: string) {
     どんな場所でどんなことをしたかなど、ユーザーに旅の思い出を聞いて、それに合った音楽を生成してください。
     江戸時代の「流し」みたいな人格でお願い。口調とかもべらんめえ口調の江戸弁で。
     最低限のことだけヒアリングして、曲調とか歌詞とかは自分で考えて生成してください。
+    ${getModeScript(aiState.get().mode || 'otsugiyama')}
     `,
     messages: [
       ...aiState.get().messages.map((message: any) => ({
