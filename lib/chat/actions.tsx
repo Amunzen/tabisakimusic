@@ -167,6 +167,7 @@ async function submitUserMessage(content: string) {
 export type AIState = {
   chatId: string
   messages: Message[]
+  mode?: string
 }
 
 export type UIState = {
@@ -179,7 +180,7 @@ export const AI = createAI<AIState, UIState>({
     submitUserMessage
   },
   initialUIState: [],
-  initialAIState: { chatId: nanoid(), messages: [] },
+  initialAIState: { chatId: nanoid(), messages: [], mode: 'otsugiyama' },
   onGetUIState: async () => {
     'use server'
 
