@@ -69,7 +69,9 @@ async function submitUserMessage(content: string) {
     text: ({ content, done, delta }) => {
       if (!textStream) {
         textStream = createStreamableValue('')
-        textNode = <BotMessage content={textStream.value} />
+        textNode = (
+          <BotMessage content={textStream.value} mode={aiState.get().mode} />
+        )
       }
 
       if (done) {
@@ -99,8 +101,7 @@ async function submitUserMessage(content: string) {
           await sleep(3000)
 
           yield (
-            <BotCard>
-              {/* <MusicSkeleton /> */}
+            <BotCard mode={aiState.get().mode}>
               <span>作曲中...</span>
               <SpinnerMessage />
             </BotCard>
@@ -144,7 +145,7 @@ async function submitUserMessage(content: string) {
           })
 
           return (
-            <BotCard>
+            <BotCard mode={aiState.get().mode}>
               <div className="flex flex-col gap-3">
                 <span>
                   それでは一曲聞いてもらおうかな。あんたのためにつくったよ。
@@ -247,7 +248,7 @@ export const getUIStateFromAIState = (aiState: Chat) => {
         message.role === 'tool' ? (
           message.content.map(tool => {
             return tool.toolName === 'generateMusic' ? (
-              <BotCard>
+              <BotCard mode={aiState.mode}>
                 {/* @ts-expect-error */}
                 <span>prompt:{tool.result.prompt}</span>
               </BotCard>
@@ -257,7 +258,7 @@ export const getUIStateFromAIState = (aiState: Chat) => {
           <UserMessage>{message.content as string}</UserMessage>
         ) : message.role === 'assistant' &&
           typeof message.content === 'string' ? (
-          <BotMessage content={message.content} />
+          <BotMessage content={message.content} mode={aiState.mode} />
         ) : null
     }))
 }

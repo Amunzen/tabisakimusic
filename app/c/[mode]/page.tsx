@@ -4,7 +4,6 @@ import { AI } from '@/lib/chat/actions'
 import { auth } from '@/auth'
 import { Session } from '@/lib/types'
 import { getMissingKeys } from '@/app/actions'
-import { EmptyScreen } from '@/components/empty-screen'
 
 export const metadata = {
   title: '旅先みゅーじっく'

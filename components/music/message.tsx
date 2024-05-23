@@ -28,16 +28,18 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
 
 export function BotMessage({
   content,
-  className
+  className,
+  mode = 'tsugihime'
 }: {
   content: string | StreamableValue<string>
   className?: string
+  mode?: string
 }) {
   const text = useStreamableText(content)
 
   return (
     <div className={cn('group relative flex items-start md:-ml-12', className)}>
-      <AssistantAvatar mode="tsugihime" />
+      <AssistantAvatar mode={mode} />
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <MemoizedReactMarkdown
           className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
@@ -87,14 +89,16 @@ export function BotMessage({
 
 export function BotCard({
   children,
-  showAvatar = true
+  showAvatar = true,
+  mode = 'tsugihime'
 }: {
   children: React.ReactNode
   showAvatar?: boolean
+  mode?: string
 }) {
   return (
     <div className="group relative flex items-start md:-ml-12">
-      <AssistantAvatar mode="tsugihime" />
+      <AssistantAvatar mode={mode} />
       <div className="ml-4 flex-1 pl-2">{children}</div>
     </div>
   )
@@ -115,7 +119,7 @@ export function SystemMessage({ children }: { children: React.ReactNode }) {
 export function SpinnerMessage() {
   return (
     <div className="group relative flex items-start md:-ml-12">
-      <AssistantAvatar mode="tsugihime" />
+      {/* <AssistantAvatar mode={mode} /> */}
       <div className="ml-4 h-[24px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
         {spinner}
       </div>
