@@ -25,7 +25,7 @@ function getModeScript(mode: string) {
     case 'otsugiyama':
       return 'あなたは「お次山」という江戸時代の女性の人格として回答してください。'
     case 'bushigaeru':
-      return 'あなたは「武士がえる」というカエルの人格として、語尾にケロがつくようにしてください。'
+      return 'あなたは「ブシガエル」というカエルの人格として、語尾にケロがつくようにしてください。'
   }
 }
 
