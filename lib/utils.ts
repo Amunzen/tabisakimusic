@@ -87,3 +87,10 @@ export const getMessageFromCode = (resultCode: string) => {
       return 'Logged in!'
   }
 }
+
+export function validateMode(mode: string) {
+  if (!['tsugihime', 'bujigaeru', 'kojiro', 'otsugiyama'].includes(mode)) {
+    return 'tsugihime'
+  }
+  return mode
+}
