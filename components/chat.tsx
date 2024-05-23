@@ -10,6 +10,7 @@ import { Message, Session } from '@/lib/types'
 import { usePathname, useRouter } from 'next/navigation'
 import { useScrollAnchor } from '@/lib/hooks/use-scroll-anchor'
 import { toast } from 'sonner'
+import { EmptyScreen } from './empty-screen'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
@@ -67,7 +68,7 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
         {messages.length ? (
           <ChatList messages={messages} isShared={false} session={session} />
         ) : (
-          <></>
+          <EmptyScreen />
         )}
         <div className="w-full h-px" ref={visibilityRef} />
       </div>

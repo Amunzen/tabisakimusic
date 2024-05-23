@@ -5,7 +5,6 @@ import { auth } from '@/auth'
 import { Session } from '@/lib/types'
 import { getMissingKeys } from '@/app/actions'
 import { EmptyScreen } from '@/components/empty-screen'
-import { AssistantAvatar } from '@/components/music/avatars'
 
 export const metadata = {
   title: '旅先みゅーじっく'
@@ -26,8 +25,7 @@ export default async function IndexPage({
 
   return (
     <div className="pt-32">
-      <AssistantAvatar mode={validatedMode} />
-      <EmptyScreen />
+      {/* <EmptyScreen /> */}
       <AI initialAIState={{ chatId: id, messages: [], mode: validatedMode }}>
         <Chat id={id} session={session} missingKeys={missingKeys} />
       </AI>
