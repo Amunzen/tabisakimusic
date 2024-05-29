@@ -34,7 +34,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className='text-white'>
         <Toaster position="top-center" />
         <Providers
           attribute="class"
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col h-screen  scroll-auto">
+          <div className="flex flex-col h-screen scroll-auto">
             <Header />
             <main className="flex flex-col flex-1 ">{children}</main>
           </div>

@@ -17,7 +17,8 @@ import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
-import Link from 'next/link'
+import { SongsSchema } from '@/app/definition'
+import SongComponent from '@/components/music/song2'
 
 function getModeScript(mode: string) {
   const validatedMode = validateMode(mode)
@@ -116,12 +117,14 @@ async function submitUserMessage(content: string) {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ prompt })
+            body: JSON.stringify({ prompt, wait_audio: true })
           }).then(res => res.json())
-          console.log('result', result)
 
-          const clipId = result[0].id
-          console.log('clipId', clipId)
+          const validatedResult = SongsSchema.parse(result)
+          const song = validatedResult[0]
+          console.log('song', song)
+
+          const clipId = song.id
 
           const toolCallId = nanoid()
 
@@ -162,17 +165,7 @@ async function submitUserMessage(content: string) {
                 <span>
                   それでは一曲聞いてもらおうかな。あんたのためにつくったよ。
                 </span>
-                <br></br>
-                {/* <span className="font-bold">「北海道弾丸旅行」</span> */}
-                <br></br>
-                <Link
-                  href={`https://suno.com/song/${clipId}`}
-                  className="text-blue-500 underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ちょいと聞いてみる
-                </Link>
+                <SongComponent song={song} />
               </div>
             </BotCard>
           )
