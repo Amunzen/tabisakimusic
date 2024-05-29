@@ -19,7 +19,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
       <div className="flex size-[40px] shrink-0 select-none items-center justify-center rounded-full border bg-background shadow-sm">
         <IconUser />
       </div>
-      <div className="ml-4 flex-1 space-y-2 overflow-hidden pl-2">
+      <div className="ml-4 flex-1 space-y-2 overflow-hidden pl-2 text-white">
         {children}
       </div>
     </div>
@@ -42,7 +42,7 @@ export function BotMessage({
       <AssistantAvatar mode={mode} />
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <MemoizedReactMarkdown
-          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-gray-800"
+          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-white"
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
@@ -108,7 +108,7 @@ export function SystemMessage({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={
-        'mt-2 flex items-center justify-center gap-2 text-xs text-gray-800'
+        'mt-2 flex items-center justify-center gap-2 text-xs text-gray'
       }
     >
       <div className={'max-w-[600px] flex-initial p-2'}>{children}</div>

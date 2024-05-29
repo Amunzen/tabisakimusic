@@ -14,7 +14,7 @@ export function ChatList({ messages, session, isShared }: ChatList) {
   }
 
   return (
-    <div className="relative mx-auto max-w-2xl  bg-white rounded-md p-10 px-20">
+    <div className="relative mx-auto max-w-2xl rounded-md p-10 px-20 backdrop-blur-lg bg-white/5">
       {messages.map((message, index) => (
         <div key={message.id} className="">
           {message.display}
