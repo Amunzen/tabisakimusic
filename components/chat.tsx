@@ -32,8 +32,6 @@ export function Chat({
   const [messages] = useUIState()
   const [aiState] = useAIState()
 
-  console.log({ messages })
-
   const [_, setNewChatId] = useLocalStorage('newChatId', id)
 
   useEffect(() => {

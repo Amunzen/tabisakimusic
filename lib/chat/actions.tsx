@@ -106,8 +106,10 @@ async function submitUserMessage(content: string) {
         generate: async function* ({ prompt }) {
           yield (
             <BotCard mode={aiState.get().mode}>
-              <span>作曲中...</span>
-              <SpinnerMessage />
+              <div className="flex flex-col gap-2">
+                <span>作曲中...</span>
+                <SpinnerMessage />
+              </div>
             </BotCard>
           )
 
@@ -120,6 +122,7 @@ async function submitUserMessage(content: string) {
             body: JSON.stringify({ prompt, wait_audio: true })
           }).then(res => res.json())
 
+          console.log('result', result)
           const validatedResult = SongsSchema.parse(result)
           const song = validatedResult[0]
           console.log('song', song)

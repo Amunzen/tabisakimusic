@@ -6,7 +6,7 @@ export const SongSchema = z.object({
   image_url: z.string().url(),
   lyric: z.string(),
   audio_url: z.string().url(),
-  video_url: z.string().url(),
+  video_url: z.string().url().or(z.literal('')).optional(),
   created_at: z.string().datetime(),
   model_name: z.string(),
   status: z.string(),
