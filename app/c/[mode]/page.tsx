@@ -25,7 +25,13 @@ export default async function IndexPage({
   return (
     <div className="pt-32">
       {/* <EmptyScreen /> */}
-      <AI initialAIState={{ chatId: id, messages: [], mode: validatedMode }}>
+      <AI
+        initialAIState={{
+          chatId: id,
+          messages: [{ id: 'test', role: 'assistant', content: 'こんにちは' }],
+          mode: validatedMode
+        }}
+      >
         <Chat id={id} session={session} missingKeys={missingKeys} />
       </AI>
     </div>

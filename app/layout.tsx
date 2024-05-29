@@ -1,4 +1,3 @@
-
 import '@/app/globals.css'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
@@ -45,7 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col h-screen  scroll-auto bg-red-200">
             <Header />
             <main className="flex flex-col flex-1 ">{children}</main>
           </div>
