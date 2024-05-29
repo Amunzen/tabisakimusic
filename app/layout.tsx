@@ -3,7 +3,6 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
-import Background from '@/components/background'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
@@ -36,7 +35,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Background />
         <Toaster position="top-center" />
         <Providers
           attribute="class"
@@ -44,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col h-screen  scroll-auto bg-red-200">
+          <div className="flex flex-col h-screen  scroll-auto">
             <Header />
             <main className="flex flex-col flex-1 ">{children}</main>
           </div>

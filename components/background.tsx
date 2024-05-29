@@ -9,6 +9,7 @@ export default function Background() {
       placeholder="blur"
       quality={100}
       fill
+      layout="fill"
       sizes="100vw"
       style={{
         objectFit: 'cover'
