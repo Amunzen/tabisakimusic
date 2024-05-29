@@ -42,7 +42,7 @@ export function BotMessage({
       <AssistantAvatar mode={mode} />
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <MemoizedReactMarkdown
-          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-gray-800"
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
@@ -108,7 +108,7 @@ export function SystemMessage({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={
-        'mt-2 flex items-center justify-center gap-2 text-xs text-gray-500'
+        'mt-2 flex items-center justify-center gap-2 text-xs text-gray-800'
       }
     >
       <div className={'max-w-[600px] flex-initial p-2'}>{children}</div>

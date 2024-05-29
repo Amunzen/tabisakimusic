@@ -24,7 +24,6 @@ export default async function IndexPage({
 
   return (
     <div className="pt-32">
-      {/* <EmptyScreen /> */}
       <AI
         initialAIState={{
           chatId: id,
