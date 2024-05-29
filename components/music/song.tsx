@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { Song } from '@/app/definition'
+import Image from 'next/image'
 
 interface SongProps {
   song: Song
@@ -20,11 +21,13 @@ export const SongComponent: React.FC<SongProps> = ({ song }) => {
   }
 
   return (
-    <div className="max-w-xl mx-auto border rounded-lg shadow-lg">
-      <img
+    <div className="max-w-xl mx-auto border rounded-lg shadow-lg bg-white">
+      <Image
+        height={100}
+        width={100}
         src={song.image_url}
         alt={song.title}
-        className="w-full h-64 object-cover rounded-t-lg"
+        // className="w-full h-64 object-cover rounded-t-lg"
       />
       <div className="mt-4 text-center">
         <h2 className="text-2xl font-bold">{song.title}</h2>
