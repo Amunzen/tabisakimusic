@@ -1,7 +1,6 @@
-
 import Image from 'next/image'
 import image from '../public/bg.png'
- 
+
 export default function Background() {
   return (
     <Image
@@ -12,7 +11,7 @@ export default function Background() {
       fill
       sizes="100vw"
       style={{
-        objectFit: 'cover',
+        objectFit: 'cover'
       }}
     />
   )

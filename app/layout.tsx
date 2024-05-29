@@ -46,6 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           GeistMono.variable
         )}
       >
+        <Background />
         <Toaster position="top-center" />
         <Providers
           attribute="class"
@@ -59,7 +60,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </div>
           <TailwindIndicator />
         </Providers>
-        <Background />
       </body>
     </html>
   )
