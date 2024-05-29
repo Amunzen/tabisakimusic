@@ -23,7 +23,7 @@ export default async function IndexPage({
   const validatedMode = validateMode(mode)
 
   return (
-    <div className="pt-32">
+    <div className="pt-10">
       <AI
         initialAIState={{
           chatId: id,
