@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/tooltip'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
 import { nanoid } from 'nanoid'
-import { useRouter } from 'next/navigation'
 
 export function PromptForm({
   input,
@@ -25,7 +24,6 @@ export function PromptForm({
   input: string
   setInput: (value: string) => void
 }) {
-  const router = useRouter()
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
   const { submitUserMessage } = useActions()
@@ -66,7 +64,7 @@ export function PromptForm({
         setMessages(currentMessages => [...currentMessages, responseMessage])
       }}
     >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-0 ">
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md  sm:px-0 bg-gray-800 text-white">
         <Textarea
           ref={inputRef}
           tabIndex={0}
@@ -85,7 +83,12 @@ export function PromptForm({
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === ''}>
+              <Button
+                type="submit"
+                size="icon"
+                disabled={input === ''}
+                className="bg-gray-200 text-black"
+              >
                 <IconArrowElbow />
                 <span className="sr-only">Send message</span>
               </Button>
