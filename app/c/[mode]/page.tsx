@@ -6,7 +6,7 @@ import { Session } from '@/lib/types'
 import { getMissingKeys } from '@/app/actions'
 
 export const metadata = {
-  title: '旅先みゅーじっく'
+  title: '旅先コンシェルジュ 楽曲生成モードβ版'
 }
 
 export default async function IndexPage({

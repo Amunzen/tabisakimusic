@@ -1,6 +1,6 @@
 function Logo() {
   return (
-    <span className="font-extrabold text-white text-xl ">旅先みゅーじっく</span>
+    <span className="font-extrabold text-white text-xl ">旅先コンシェルジュ 楽曲生成モードβ版</span>
   )
 }
 

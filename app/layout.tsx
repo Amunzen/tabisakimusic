@@ -7,14 +7,15 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import Background from '@/components/background'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: '旅先みゅーじっく',
-    template: `%s - 旅先みゅーじっく`
+    default: '旅先コンシェルジュ 楽曲生成モードβ版',
+    template: `%s - 旅先コンシェルジュ 楽曲生成モードβ版`
   },
   description: '旅先のおもいでの音楽を生成',
   icons: {
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </div>
           <TailwindIndicator />
         </Providers>
+        <Background />
       </body>
     </html>
   )
