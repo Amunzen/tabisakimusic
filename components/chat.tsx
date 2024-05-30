@@ -72,7 +72,7 @@ export function Chat({
         input={input}
         setInput={setInput}
         isAtBottom={isAtBottom}
-        scrollToBottom={scrollToBottom}
+        scrollToBottom={() => {}}
       />
     </div>
   )
