@@ -24,7 +24,7 @@ export default function SongComponent({
 
   const [isPlaying, setIsPlaying] = useState(false)
   return (
-    <div className="flex items-top justify-evenly text-white pt-4">
+    <div className="sm:flex items-top justify-evenly text-white pt-4  ">
       <div className="flex flex-col items-center gap-4">
         <Image
           alt="Album Cover"
@@ -34,7 +34,7 @@ export default function SongComponent({
           width={200}
         />
         <div className="flex justify-center">
-          <button className="text-white  rounded-full p-2" onClick={togglePlay}>
+          <button className="text-white rounded-full p-2" onClick={togglePlay}>
             {isPlaying ? (
               <div className="flex items-center gap-2">
                 <PauseIcon className="w-8 h-8" />

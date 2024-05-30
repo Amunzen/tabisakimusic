@@ -11,7 +11,7 @@ export default async function Page() {
   console.log({ songs })
   const song = songs[0]
   return (
-    <div className=" p-24 backdrop-blur-md">
+    <div className="p-24 backdrop-blur-md">
       <Content />
       <SongComponent song={song} />
     </div>
