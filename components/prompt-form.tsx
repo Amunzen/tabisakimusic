@@ -79,6 +79,7 @@ export function PromptForm({
           rows={1}
           value={input}
           onChange={e => setInput(e.target.value)}
+          maxLength={300}
         />
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>

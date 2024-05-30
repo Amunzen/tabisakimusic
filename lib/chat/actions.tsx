@@ -62,7 +62,6 @@ async function submitUserMessage(content: string) {
     どんな場所でどんなことをしたかなど、ユーザーに旅の思い出を聞いて、それに合った音楽を生成してください。
     江戸時代の「流し」みたいな人格でお願い。口調とかもべらんめえ口調の江戸弁で。
     最低限のことだけヒアリングして、曲調とか歌詞とかは自分でなるべく考えてどんどん生成してください。
-    作曲を開始するときは「それではこういう曲調で作曲します」などとはユーザーに言わず、すぐgenerateMusicを呼び出してください。
     
     ${getModeScript(aiState.get().mode || 'otsugiyama')}
     `,
@@ -108,12 +107,11 @@ async function submitUserMessage(content: string) {
           yield (
             <BotCard mode={aiState.get().mode}>
               <div className="flex flex-col gap-2">
-                <span>作曲中...</span>
+                <span>作曲中。数十秒ほどかかることがあります。</span>
                 {spinner}
               </div>
             </BotCard>
           )
-
           const url = 'https://suno-api-opal-alpha.vercel.app/api/generate'
           const result = await fetch(url, {
             method: 'POST',
