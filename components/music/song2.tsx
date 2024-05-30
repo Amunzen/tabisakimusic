@@ -24,7 +24,7 @@ export default function SongComponent({
 
   const [isPlaying, setIsPlaying] = useState(false)
   return (
-    <div className="sm:flex items-top justify-evenly text-white pt-4  ">
+    <div className="sm:flex items-top justify-evenly text-white pt-4 -ml-16">
       <div className="flex flex-col items-center gap-4">
         <Image
           alt="Album Cover"
