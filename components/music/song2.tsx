@@ -24,11 +24,11 @@ export default function SongComponent({
 
   const [isPlaying, setIsPlaying] = useState(false)
   return (
-    <div className="flex items-top justify-evenly h-screen text-white  pt-4">
+    <div className="flex items-top justify-evenly text-white pt-4">
       <div className="flex flex-col items-center gap-4">
         <Image
           alt="Album Cover"
-          className="rounded-lg shadow-lg bg-blue-200"
+          className="rounded-lg shadow-lg bg-blue-200 object-cover"
           height={200}
           src={image_url}
           width={200}
