@@ -1,3 +1,5 @@
+export const maxDuration = 300 // Applies to the actions
+
 import { nanoid, validateMode } from '@/lib/utils'
 import { Chat } from '@/components/chat'
 import { AI } from '@/lib/chat/actions'
