@@ -24,31 +24,38 @@ export default function SongComponent({
 
   const [isPlaying, setIsPlaying] = useState(false)
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-white ">
-      <div className="max-w-md w-full space-y-6">
-        <div className="flex flex-col items-center">
-          <Image
-            alt="Album Cover"
-            className="rounded-lg shadow-lg object-cover"
-            height={200}
-            src={image_url}
-            width={200}
-          />
-          <div className="mt-6 text-center">
-            <h2 className="text-xl font-bold">{title}</h2>
-          </div>
-        </div>
+    <div className="flex items-top justify-evenly h-screen text-white  pt-4">
+      <div className="flex flex-col items-center gap-4">
+        <Image
+          alt="Album Cover"
+          className="rounded-lg shadow-lg bg-blue-200"
+          height={200}
+          src={image_url}
+          width={200}
+        />
         <div className="flex justify-center">
           <button className="text-white  rounded-full p-2" onClick={togglePlay}>
             {isPlaying ? (
-              <PauseIcon className="w-8 h-8" />
+              <div className="flex items-center gap-2">
+                <PauseIcon className="w-8 h-8" />
+                <span>Stop</span>
+              </div>
             ) : (
-              <PlayIcon className="w-8 h-8" />
+              <div className="flex items-center gap-2">
+                <PlayIcon className="w-8 h-8" />
+                <span>Play</span>
+              </div>
             )}
           </button>
         </div>
+      </div>
+      <div>
+        <div className="mt-6 text-center">
+          <h2 className="text-xl font-bold">{title}</h2>
+        </div>
+
         <div className="prose prose-invert text-center">
-          <div className="prose-p:my-2">
+          <div className="prose-p:my-1">
             {lyric.split('\n').map((line, index) => (
               <p key={index}>{line}</p>
             ))}

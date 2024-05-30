@@ -9,7 +9,7 @@ import {
 } from 'ai/rsc'
 import { openai } from '@ai-sdk/openai'
 
-import { BotCard, BotMessage } from '@/components/music'
+import { BotCard, BotMessage, spinner } from '@/components/music'
 
 import { z } from 'zod'
 import { nanoid, validateMode } from '@/lib/utils'
@@ -61,7 +61,8 @@ async function submitUserMessage(content: string) {
     あなたは東急の定額泊まり放題サービス「Tsugitsugi」の「旅先ミュージック」のアシスタントです。
     どんな場所でどんなことをしたかなど、ユーザーに旅の思い出を聞いて、それに合った音楽を生成してください。
     江戸時代の「流し」みたいな人格でお願い。口調とかもべらんめえ口調の江戸弁で。
-    最低限のことだけヒアリングして、曲調とか歌詞とかは自分でなるべく考えて生成してください。
+    最低限のことだけヒアリングして、曲調とか歌詞とかは自分でなるべく考えてどんどん生成してください。
+    作曲を開始するときは「わかったよ、作曲します」などとは言わず、すぐに作曲を開始してください。
     
     ${getModeScript(aiState.get().mode || 'otsugiyama')}
     `,
@@ -108,7 +109,7 @@ async function submitUserMessage(content: string) {
             <BotCard mode={aiState.get().mode}>
               <div className="flex flex-col gap-2">
                 <span>作曲中...</span>
-                <SpinnerMessage />
+                {spinner}
               </div>
             </BotCard>
           )

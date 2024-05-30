@@ -1,4 +1,5 @@
 import { SongsSchema } from '@/app/definition'
+import { Content } from './content'
 import SongComponent from '@/components/music/song2'
 export default async function Page() {
   const url =
@@ -10,7 +11,8 @@ export default async function Page() {
   console.log({ songs })
   const song = songs[0]
   return (
-    <div className="pt-10">
+    <div className=" p-24 backdrop-blur-md">
+      <Content />
       <SongComponent song={song} />
     </div>
   )
