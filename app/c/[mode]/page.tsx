@@ -29,7 +29,7 @@ export default async function IndexPage({
       <AI
         initialAIState={{
           chatId: id,
-          messages: [{ id: 'test', role: 'assistant', content: 'こんにちは' }],
+          messages: [],
           mode: validatedMode
         }}
       >

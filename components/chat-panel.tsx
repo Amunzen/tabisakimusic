@@ -47,7 +47,7 @@ export function ChatPanel({
 
         <div className="space-y-4  bg-gray-800 px-4 py-2 shadow-lg sm:rounded-t-xl md:py-4 border border-gray-600">
           <PromptForm input={input} setInput={setInput} />
-          <FooterText className="text-gray-300 text-xs" />
+          <FooterText className="text-gray-200 text-xs" />
         </div>
       </div>
     </div>
