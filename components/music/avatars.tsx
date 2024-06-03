@@ -6,19 +6,19 @@ export function AssistantAvatar({ mode }: { mode: string }) {
   const validatedMode = validateMode(mode)
   switch (validatedMode) {
     case 'tsugihime':
-      path = 'tsugihime.webp'
+      path = 'tsugihime.png'
       break
     case 'bujigaeru':
-      path = 'bujigaeru.webp'
+      path = 'bujigaeru.png'
       break
     case 'kojiro':
-      path = 'kojiro.webp'
+      path = 'kojiro.png'
       break
     case 'otsugiyama':
-      path = 'otsugiyama.webp'
+      path = 'otsugiyama.png'
       break
     default:
-      path = 'tsugihime.webp'
+      path = 'tsugihime.png'
       break
   }
   return (
