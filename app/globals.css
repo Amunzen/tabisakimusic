@@ -41,15 +41,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url('/bg.png');
-    background-size: cover;
-    background-color: rgba(
-      255,
-      255,
-      255,
-      0.7
-    ); /* Semi-transparent background color */
-    background-attachment: fixed;
   }
   .content {
     @apply bg-white bg-opacity-70; /* Content with some transparency */

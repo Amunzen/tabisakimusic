@@ -3,6 +3,7 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import Background from '@/components/background'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
@@ -34,7 +35,10 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className='text-white'>
+      <body className="text-white bg-black">
+        <div className="fixed top-0 left-0 w-full h-screen z-[-1]">
+          <Background />
+        </div>
         <Toaster position="top-center" />
         <Providers
           attribute="class"

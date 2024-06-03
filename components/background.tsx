@@ -1,19 +1,18 @@
 import Image from 'next/image'
-import image from '../public/bg.png'
+import image from '../public/bg.webp'
 
 export default function Background() {
   return (
     <Image
-      alt="Mountains"
+      alt="Background"
       src={image}
       placeholder="blur"
       quality={100}
-      fill
+      // fill
+
       layout="fill"
-      sizes="100vw"
-      style={{
-        objectFit: 'cover'
-      }}
+      
+      objectFit="cover"
     />
   )
 }
