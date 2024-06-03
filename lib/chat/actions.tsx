@@ -121,8 +121,17 @@ async function submitUserMessage(content: string) {
           }
 
           console.log('result', result)
-          const validatedResult = SongsSchema.parse(result)
-          const song = validatedResult[0]
+          const validatedResult = SongsSchema.safeParse(result)
+          if (!validatedResult.success) {
+            console.log('result', result)
+            console.error('validatedResult', validatedResult.error)
+            return (
+              <SystemMessage>
+                エラーが発生しました。恐れ入りますが、画面を更新し、再度実行してください。
+              </SystemMessage>
+            )
+          }
+          const song = validatedResult.data[0]
           console.log('song', song)
 
           const clipId = song.id
