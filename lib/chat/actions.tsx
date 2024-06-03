@@ -110,7 +110,7 @@ async function submitUserMessage(content: string) {
         generate: async function* ({ prompt }) {
           yield (
             <SystemMessage>
-              <span>作曲中。数十秒ほどかかることがあります。</span>
+              作曲中。数十秒ほどかかることがあります。
               {spinner}
             </SystemMessage>
           )

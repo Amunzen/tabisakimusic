@@ -3,7 +3,21 @@ import { Song } from '@/app/definition'
 import Image from 'next/image'
 import { PlayIcon, PauseIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
+import { buttonVariants } from '../ui/button'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 export default function SongComponent({
   song: { id, title, image_url, lyric, audio_url }
 }: {
@@ -60,6 +74,15 @@ export default function SongComponent({
               <p key={index}>{line}</p>
             ))}
           </div>
+        </div>
+        <div className="w-full flex justify-center pt-10">
+          <Link
+            href={`https://cdn1.suno.ai/${id}.mp4`}
+            className={cn(buttonVariants({ variant: 'default' }))}
+            target="_blank"
+          >
+            曲をダウンロード
+          </Link>
         </div>
       </div>
     </div>

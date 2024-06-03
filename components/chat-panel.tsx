@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { PromptForm } from '@/components/prompt-form'
-import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
 import { useAIState, useActions, useUIState } from 'ai/rsc'
 import type { AI } from '@/lib/chat/actions'
 import { FooterText } from './footer'
@@ -31,11 +30,6 @@ export function ChatPanel({
   const exampleMessages = []
   return (
     <div className="fixed inset-x-0 bottom-0 w-ful peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px] ">
-      <ButtonScrollToBottom
-        isAtBottom={isAtBottom}
-        scrollToBottom={scrollToBottom}
-      />
-
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         <div className="mb-4 grid grid-cols-2 gap-2 px-4 sm:px-0"></div>
 
