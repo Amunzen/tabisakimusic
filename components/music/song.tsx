@@ -1,45 +1,70 @@
 'use client'
-import React, { useState } from 'react'
 import { Song } from '@/app/definition'
 import Image from 'next/image'
+import { PlayIcon, PauseIcon } from '@radix-ui/react-icons'
+import { useState } from 'react'
 
-interface SongProps {
+import { MovieDownloadButton } from './movie-download-button'
+export default function SongComponent({
+  song: { id, title, image_url, lyric, audio_url }
+}: {
   song: Song
-}
-
-export const SongComponent: React.FC<SongProps> = ({ song }) => {
-  const [isPlaying, setIsPlaying] = useState(false)
-
+}) {
+  const [audio, setAudio] = useState<HTMLAudioElement>(new Audio(audio_url))
   const togglePlay = () => {
-    const audio = new Audio(song.audio_url)
     if (isPlaying) {
       audio.pause()
+      console.log('paused')
+      setIsPlaying(false)
     } else {
       audio.play()
+      console.log('playing')
+      setIsPlaying(true)
     }
-    setIsPlaying(!isPlaying)
   }
 
+  const [isPlaying, setIsPlaying] = useState(false)
   return (
-    <div className="max-w-xl mx-auto border rounded-lg shadow-lg bg-white">
-      <Image
-        height={100}
-        width={100}
-        src={song.image_url}
-        alt={song.title}
-        // className="w-full h-64 object-cover rounded-t-lg"
-      />
-      <div className="mt-4 text-center">
-        <h2 className="text-2xl font-bold">{song.title}</h2>
-        <p className="text-gray-600  whitespace-pre-line">{song.lyric}</p>
+    <div className="sm:flex items-top justify-evenly text-white pt-4 -ml-16">
+      <div className="flex flex-col items-center gap-4">
+        <Image
+          alt="Album Cover"
+          className="rounded-lg shadow-lg bg-blue-200 object-cover"
+          height={200}
+          src={image_url}
+          width={200}
+        />
+        <div className="flex justify-center">
+          <button className="text-white rounded-full p-2" onClick={togglePlay}>
+            {isPlaying ? (
+              <div className="flex items-center gap-2">
+                <PauseIcon className="w-8 h-8" />
+                <span>Stop</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <PlayIcon className="w-8 h-8" />
+                <span>Play</span>
+              </div>
+            )}
+          </button>
+        </div>
       </div>
-      <div className="mt-4 text-center">
-        <button
-          onClick={togglePlay}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-        >
-          {isPlaying ? 'Stop' : 'Play'}
-        </button>
+      <div>
+        <div className="mt-6 text-center">
+          <h2 className="text-xl font-bold">{title}</h2>
+        </div>
+
+        <div className="prose prose-invert text-center">
+          <div className="prose-p:my-1">
+            {lyric.split('\n').map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
+          </div>
+        </div>
+        <div className="w-full flex justify-center pt-10">
+          <MovieDownloadButton url={`https://cdn1.suno.ai/${id}.mp4`} />
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { SongsSchema } from '@/app/definition'
 import { Content } from './content'
-import SongComponent from '@/components/music/song2'
+import SongComponent from '@/components/music/song'
 export default async function Page() {
   const url =
     'https://suno-api-opal-alpha.vercel.app/api/get?ids=357c8cb0-28ac-4a75-b52a-c886489bd823'

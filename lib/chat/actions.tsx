@@ -22,7 +22,7 @@ import {
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
 import { SongsSchema } from '@/app/definition'
-import SongComponent from '@/components/music/song2'
+import SongComponent from '@/components/music/song'
 
 function getModeScript(mode: string) {
   const validatedMode = validateMode(mode)
@@ -111,7 +111,7 @@ async function submitUserMessage(content: string) {
           yield (
             <SystemMessage>
               作曲中。数十秒ほどかかることがあります。
-              {spinner}
+              <div>{spinner}</div>
             </SystemMessage>
           )
           const url = 'https://suno-api-opal-alpha.vercel.app/api/generate'
