@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import { useUIState, useAIState } from 'ai/rsc'
 import { Message, Session } from '@/lib/types'
 import { usePathname, useRouter } from 'next/navigation'
-import { useScrollAnchor } from '@/lib/hooks/use-scroll-anchor'
 import { toast } from 'sonner'
 import { EmptyScreen } from './empty-screen'
 
@@ -51,27 +50,24 @@ export function Chat({
     })
   }, [missingKeys])
 
-  const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
-    useScrollAnchor()
-
   return (
     <div
       className="group w-full overflow-auto pl-0 peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px] "
-      ref={scrollRef}
+      ref={null}
     >
-      <div className={cn('pb-[200px] ', className)} ref={messagesRef}>
+      <div className={cn('pb-[200px] ', className)} ref={null}>
         {messages.length ? (
           <ChatList messages={messages} isShared={false} session={session} />
         ) : (
           <EmptyScreen />
         )}
-        <div className="w-full h-px" ref={visibilityRef} />
+        <div className="w-full h-px" ref={null} />
       </div>
       <ChatPanel
         id={id}
         input={input}
         setInput={setInput}
-        isAtBottom={isAtBottom}
+        isAtBottom={false}
         scrollToBottom={() => {}}
       />
     </div>
