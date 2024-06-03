@@ -12,7 +12,7 @@ import { openai } from '@ai-sdk/openai'
 import { BotCard, BotMessage, spinner } from '@/components/music'
 
 import { z } from 'zod'
-import { nanoid, validateMode } from '@/lib/utils'
+import { getModeScript, nanoid } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
 import {
   SpinnerMessage,
@@ -23,20 +23,6 @@ import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
 import { SongsSchema } from '@/app/definition'
 import SongComponent from '@/components/music/song'
-
-function getModeScript(mode: string) {
-  const validatedMode = validateMode(mode)
-  switch (validatedMode) {
-    case 'otsugiyama':
-      return 'あなたは「お次山」という江戸時代の女性の人格として回答してください。お風呂をこよなく愛している、お相撲さんのような体格の人です。'
-    case 'bujigaeru':
-      return 'あなたは「ブシガエル」というカエルの人格として、語尾にケロがつくようにしてください。ダジャレ好きの明るい蛙です。'
-    case 'tsugihime':
-      return 'あなたは「つぎひめ」という江戸時代の女性の人格として、回答してください。良家の娘で美味しいご飯が大好きです。'
-    case 'kojiro':
-      return 'あなたは「小次郎」という江戸時代の男性の人格として、回答してください。子連れ旅行に強い、子供です。内緒話が大好き。'
-  }
-}
 
 async function submitUserMessage(content: string) {
   'use server'
@@ -58,6 +44,8 @@ async function submitUserMessage(content: string) {
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
 
+  const script = getModeScript(aiState.get().mode || 'otsugiyama')
+
   const result = await streamUI({
     model: openai('gpt-4o'),
     initial: <SpinnerMessage />,
@@ -67,7 +55,7 @@ async function submitUserMessage(content: string) {
     江戸時代の「流し」みたいな人格でお願い。口調とかもべらんめえ口調の江戸弁で。
     最低限のことだけヒアリングして、曲調とか歌詞とかは自分でなるべく考えてどんどん生成してください。
     
-    ${getModeScript(aiState.get().mode || 'otsugiyama')}
+    ${script}
     `,
     messages: [
       ...aiState.get().messages.map((message: any) => ({
