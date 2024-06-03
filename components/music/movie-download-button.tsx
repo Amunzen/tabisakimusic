@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +13,20 @@ import {
 import { Button } from '@/components/ui/button'
 
 export function MovieDownloadButton({ url }: { url: string }) {
+  const [isReady, setIsReady] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsReady(true)
+    }, 60000) // 1 minute in milliseconds
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!isReady) {
+    return <Button disabled>ダウンロード準備中...</Button>
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
