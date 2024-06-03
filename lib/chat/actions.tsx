@@ -14,7 +14,11 @@ import { BotCard, BotMessage, spinner } from '@/components/music'
 import { z } from 'zod'
 import { nanoid, validateMode } from '@/lib/utils'
 import { saveChat } from '@/app/actions'
-import { SpinnerMessage, UserMessage } from '@/components/music/message'
+import {
+  SpinnerMessage,
+  SystemMessage,
+  UserMessage
+} from '@/components/music/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
 import { SongsSchema } from '@/app/definition'
@@ -105,21 +109,28 @@ async function submitUserMessage(content: string) {
         parameters: z.object({ prompt: z.string() }),
         generate: async function* ({ prompt }) {
           yield (
-            <BotCard mode={aiState.get().mode}>
-              <div className="flex flex-col gap-2">
-                <span>作曲中。数十秒ほどかかることがあります。</span>
-                {spinner}
-              </div>
-            </BotCard>
+            <SystemMessage>
+              <span>作曲中。数十秒ほどかかることがあります。</span>
+              {spinner}
+            </SystemMessage>
           )
           const url = 'https://suno-api-opal-alpha.vercel.app/api/generate'
-          const result = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ prompt, wait_audio: true })
-          }).then(res => res.json())
+
+          let result: any = {}
+          try {
+            result = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ prompt, wait_audio: true })
+            }).then(res => res.json())
+          } catch (error) {
+            console.error(error)
+            return (
+              <SystemMessage>
+                エラーが発生しました。恐れ入りますが、画面を更新し、再度実行してください。
+              </SystemMessage>
+            )
+          }
 
           console.log('result', result)
           const validatedResult = SongsSchema.parse(result)
