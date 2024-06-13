@@ -24,6 +24,12 @@ export default async function IndexPage({
 
   const validatedMode = validateMode(mode)
 
+  return <div className='container bg-white text-black p-10 min-h-32 text-center flex justify-center items-center'>
+    現在、楽曲生成モードはメンテナンス中です。復旧には数日かかる見込みです。
+    <br />
+    ご迷惑をおかけし、申し訳ありません。
+  </div>
+
   return (
     <div className="pt-10">
       <AI
