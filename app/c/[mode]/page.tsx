@@ -24,8 +24,16 @@ export default async function IndexPage({
 
   const validatedMode = validateMode(mode)
 
+
+  const year = new Date().getFullYear()
+  const month = new Date().getMonth() + 1
+  const day = new Date().getDate()
+
+  const todayInJapanFormat = `${year}年${month}月${day}日`
+
   return <div className='container bg-white text-black p-10 min-h-32 text-center flex justify-center items-center'>
-    現在、楽曲生成モードはメンテナンス中です。復旧には数日かかる見込みです。
+
+    現在、楽曲生成モードはメンテナンス中です。{todayInJapanFormat}現在、復旧には数日かかる見込みです。
     <br />
     ご迷惑をおかけし、申し訳ありません。
   </div>
